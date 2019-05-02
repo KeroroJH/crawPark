@@ -13,7 +13,7 @@ public class Dbconn {
 	PreparedStatement stmt = null;
 	ResultSet rs = null;
 	
-	final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	final String DRIVER = "com.mysql.jdbc.Driver";
 	 String URL;
 	 String USER;
 	 String PW;
