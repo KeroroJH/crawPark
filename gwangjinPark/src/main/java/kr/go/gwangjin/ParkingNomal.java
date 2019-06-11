@@ -45,7 +45,7 @@ public class ParkingNomal {
 		 dbconn.deleteOldData();
 		 //시리얼 검사
 		 try {
-			 if(CryptoUtil.checkLicense(serialNO)){
+			 if(! CryptoUtil.checkLicense(serialNO)){
 				 System.out.println("serial is Expired");
 				 return;
 			 };
