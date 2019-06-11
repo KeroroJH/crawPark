@@ -33,13 +33,25 @@ public class ParkingNomal {
 	String siteUrl =  bufRead.readLine().replace("URL=","");
 	String siteUser =  bufRead.readLine().replace("USER=","");
 	String sitePw =  bufRead.readLine().replace("PW=","");	
+	bufRead.readLine();
+	bufRead.readLine();
+	String serialNO =  bufRead.readLine().replace("serialNO=","");	
 	bufRead.close();
 	//DB생성
 	Dbconn dbconn = new Dbconn(dbUrl,dbUser,dbPw);
-	//2들전 데이터 삭제
-	dbconn.deleteOldData();
 	 outer :
 	 while(true){
+		 //2들전 데이터 삭제
+		 dbconn.deleteOldData();
+		 //시리얼 검사
+		 try {
+			 if(CryptoUtil.checkLicense(serialNO)){
+				 System.out.println("serial is Expired");
+				 return;
+			 };
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
 		 WebCrawl cw = new WebCrawl(siteUrl,siteUser,sitePw,chromeDriverPath);
 			try {
 				if(cw.goCrawlReady())
