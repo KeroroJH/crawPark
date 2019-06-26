@@ -36,10 +36,17 @@ public class CryptoUtil {
 	 * @throws NoSuchPaddingException 
 	 * @throws InvalidKeyException 
 	 */
-	public static Boolean checkLicense(String plainText) throws InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException {
+	public static Boolean checkLicense(String plainText) throws  NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException {
 		String key = "keroro";
 
-		String decStr = decryptAES256(plainText, key);
+		String decStr;
+			//잘못된 압호문 입력시
+		try {
+			decStr = decryptAES256(plainText, key);
+		} catch (Exception e) {
+			System.out.println("잘못된 암호문 ");
+			return false;
+		}
 
 		String result = decStr.split("_")[1]; //ex) 20190611
 		int parseResult = Integer.parseInt(result);
