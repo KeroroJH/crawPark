@@ -13,7 +13,7 @@ public class ParkingNomal {
 	 String chromeDriverPath = "";
 	 if(OS.indexOf("win") >= 0){
 		 System.out.println("this system OS is window");
-		 chromeDriverPath = "c://parking//chromedriver.exe";
+		 chromeDriverPath = "c://parking//chromedriver_old.exe";
 		 //DB설정 정보 가져오기
 			input = new FileReader("C://parking//dbconn.pom");
 	 }else if(OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0){

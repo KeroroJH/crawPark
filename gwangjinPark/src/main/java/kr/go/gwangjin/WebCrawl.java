@@ -66,20 +66,25 @@ public class WebCrawl {
 	
 	 }
 	public List<Car> getCrawlData() throws Exception{
+		//현재시간
+		Date date = new Date();
+		//10분전 시간
+		Date date2 = new Date(System.currentTimeMillis() - 600 * 1000);
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("YYYY/MM/dd");
+		String currDay = sdf2.format(date);
+		String time1 = sdf.format(date).substring(0, 4);
+		String time2 = sdf.format(date2).substring(0, 4);
 			List<Car> cars = new ArrayList<>();
 		  js = (JavascriptExecutor) driver;
+		 //현재날짜 세팅
+		  js.executeScript("search_from_dt_str.value ='"+currDay+"'");
+		  js.executeScript("search_to_dt_str.value ='"+currDay+"'");
 		 //페이징 삭제
 		  js.executeScript("onPaging.value = false;");
 		 // 주차리스트 가져오기
 		 js.executeScript("getListData(1);");
 		 Thread.sleep(900);
-		 	//현재시간
-			Date date = new Date();
-			//10분전 시간
-			Date date2 = new Date(System.currentTimeMillis() - 600 * 1000);
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-			String time1 = sdf.format(date).substring(0, 4);
-			String time2 = sdf.format(date2).substring(0, 4);
 			//현재시간 기준 차량 임시저장
 		  js.executeScript("__prepareService__ = $('#listData > table > tbody > tr:contains(\""+time1+"\")');");
 		  Thread.sleep(300);
